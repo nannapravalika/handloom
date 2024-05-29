@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'handloom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'handloom',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'handloomdb_user',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'PASSWORD': 'NuzRbstVje548dOvBRy9PJrd8tZ04VFf',
+        'HOST': 'dpg-cpbmtmuct0pc73a8elo0-a',
+        'PORT': '5432',
     }
 }
 
