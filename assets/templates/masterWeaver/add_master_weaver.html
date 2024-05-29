@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- New Master Weaver Details Form -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Master Weaver</strong> Form
+                </div>
+                <div class="card-body card-block">
+                    <form action="{% url 'add_master_weaver' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="master-weaver-name" class="form-control-label">Master Weaver Name</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="master-weaver-name" name="master_weaver_name" placeholder="Master Weaver Name" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="address" class="form-control-label">Address</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="address" name="address" placeholder="Address" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="door-no" class="form-control-label">Door No</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="door-no" name="door_no" placeholder="Door No" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="street" class="form-control-label">Street</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="street" name="street" placeholder="Street" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="area-name" class="form-control-label">Area Name</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="area-name" name="area_name" placeholder="Area Name" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="mandal" class="form-control-label">Mandal</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="mandal" name="mandal" placeholder="Mandal" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="district" class="form-control-label">District</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="district" name="district" placeholder="District" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="state" class="form-control-label">State</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="state" name="state" placeholder="State" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="mobile-no" class="form-control-label">Mobile No</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="mobile-no" name="mobile_no" placeholder="Mobile No" class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary">Add Master Weaver</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.content -->
+        <div class="clearfix"></div>
+
+{% endblock %}

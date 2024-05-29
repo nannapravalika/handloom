@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="mt-4">Weaver List</h2>
+        <!-- Create Weaver Button -->
+        <a href="{% url 'add_weaver' %}"   class="btn btn-success mb-3">Create Weaver</a>
+
+        <!-- Search form -->
+        <form method="GET" action="{% url 'list_weavers' %}">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Search by name or mobile no" value="{{ search_query }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <!-- Weaver List Table -->
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>S. No.</th>
+                    <th>Weaver Name</th>
+                    <th>Mobile No</th>
+                    <th>Society Name</th>
+                    <th>Master Weaver Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in weavers %}
+                <tr id="row-{{ row.id }}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ row.weaver_name }}</td>
+                    <td>{{ row.mobile_no }}</td>
+                    <td>{{ row.society_name }}</td>
+                    <td>{{ row.master_weaver_name }}</td>
+                    <td>
+                        <a href="{% url 'edit_weaver' row.id %}"  class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'remove_weaver' row.id %}"  class="btn btn-danger btn-sm delete-button" onclick="return confirm('Are you sure?')">Delete</a>
+
+                        {% comment %} <button class="btn btn-danger btn-sm delete-button" data-id="{{ row.id }}" onclick="return confirm('Are you sure?')">Delete</button> {% endcomment %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6">No results found</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if total_pages %}
+        <ul class="pagination">
+            {% for i in total_pages %}
+                <li class="page-item"><a class="page-link" href="{% url 'list_weaver' %}?page={{ i }}&search={{ request.GET.search }}">{{ i }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const weaverId = this.getAttribute('data-id');
+                const row = document.getElementById('row-' + weaverId);
+                if (row && confirm('Are you sure?')) {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+    
+{% endblock %}

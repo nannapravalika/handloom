@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        <div class="container">
+            <h2 class="mt-4">Master Weaver List</h2>
+            <!-- Create Weaver Button -->
+            <a href="{% url 'add_master_weaver' %}"  class="btn btn-success mb-3">Create Master Weaver</a>
+
+            <!-- Search form -->
+            <form method="GET" action="{% url 'list_master_weaver' %}">
+                <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name or mobile no" value="{{ search_query }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+            <!-- Weaver List Table -->
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Master Weaver Name</th>
+                        <th>Mobile No</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in master_weaver_list %}
+                        <tr>
+                            <td>{{ row.master_weaver_name }}</td>
+                            <td>{{ row.mobile_no }}</td>
+                            <td>{{ row.status }}</td>
+                            
+                            <td>
+                                <a href="{% url 'edit_master_weaver' row.id %}"  class="btn btn-info btn-sm">View</a>
+                                <a href="{% url 'delete_master_weaver' row.id %}"   class="btn btn-danger btn-sm delete-button" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="4">No results found</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            {% if total_pages %}
+                <ul class="pagination">
+                    {% for i in total_pages %}
+                        <li class="page-item"><a class="page-link" href="{% url 'list_master_weaver' %}?page={{ i }}&search={{ request.GET.search }}">{{ i }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        
+        </div>
+    </div>
+    <script>
+        function removeRow(button, id) {
+            // Remove the row from the table
+            var row = button.closest('tr');
+            row.style.display = 'none';
+
+            // Optionally, add code to track removed rows if needed
+        }
+    </script>
+{% endblock %}

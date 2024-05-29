@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- New Weaver Person Details Form -->
+        <div class="card">
+            <div class="card-header">
+                <strong>Weaver Person Details</strong>
+            </div>
+            <div class="card-body card-block">
+                <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                    {% csrf_token %} 
+                    
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="photo" class="form-control-label">Photo</label></div>
+                        <div class="col-12 col-md-4">
+                            <input type="file" id="photo" name="photo" class="form-control-file">
+                            {% if weaver.photo %}
+                                <img src="{{ weaver.photo.url }}" alt="Weaver Photo" style="max-width: 100px; max-height: 100px;">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="society_name" class="form-control-label">Society/Firm Name</label></div>
+                        <div class="col-12 col-md-4">
+                            <select id="society-name" name="society_name" class="form-control" required>
+                                {% for row in societies %}
+                                    <option value="{{ row.society_name }}" {% if row.society_name == weaver.society_name %} selected {% endif %}>{{ row.society_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col col-md-2"><label for="weaver_code" class="form-control-label">Weaver Code No</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="weaver_code" name="weaver_code" class="form-control" value="{{ weaver.weaver_code }}" required></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="master-weaver-name" class="form-control-label">Master Weaver Name</label></div>
+                        <div class="col-12 col-md-4">
+                            <select id="master-weaver-name" name="master_weaver_name" class="form-control" required>
+                                {% for row in master_weavers %}
+                                    <option value="{{ row.master_weaver_name }}" {% if row.master_weaver_name == weaver.master_weaver_name %} selected {% endif %}>{{ row.master_weaver_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                    </div>
+                     
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="weaver_name" class="form-control-label">Weaver Name</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="weaver_name" name="weaver_name" class="form-control" value="{{ weaver.weaver_name }}" required></div>
+                        <div class="col col-md-2"><label for="weaver-card" class="form-control-label">Weaver Card</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="weaver-card" name="weaver_card" class="form-control" value="{{ weaver.weaver_card }}" required></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="relationship" class="form-control-label">Relationship S/o, W/o</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="relationship" name="relationship" class="form-control" value="{{ weaver.relationship }}"></div>
+                        <div class="col col-md-2"><label for="age" class="form-control-label">Age</label></div>
+                        <div class="col-12 col-md-4"><input type="number" id="age" name="age" class="form-control" value="{{ weaver.age }}"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="ration-card" class="form-control-label">Ration Card</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="ration-card" name="ration_card" class="form-control" value="{{ weaver.ration_card }}" ></div>
+                        
+                        <div class="col col-md-2"><label for="nhdc-passbook" class="form-control-label">NHDC Passbook</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="nhdc-passbook" name="nhdc_passbook" class="form-control" value="{{ weaver.nhdc_passbook }}" ></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="aadhar-card" class="form-control-label">Aadhar Card</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="aadhar-card" name="aadhar_card" class="form-control" value="{{ weaver.aadhar_card }}"></div>
+                        
+                        <div class="col col-md-2"><label for="mobile-no" class="form-control-label">Mobile No</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="mobile-no" name="mobile_no" class="form-control" value="{{ weaver.mobile_no }}" required></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="address" class="form-control-label">Address</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="address" name="address" class="form-control" value="{{ weaver.address }}"></div>
+                        
+                        <div class="col col-md-2"><label for="door-no" class="form-control-label">Door No</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="door-no" name="door_no" class="form-control" value="{{ weaver.door_no }}" required></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="street" class="form-control-label">Street</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="street" name="street" class="form-control" value="{{ weaver.street }}"></div>
+                        
+                        <div class="col col-md-2"><label for="area-name" class="form-control-label">Area Name</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="area-name" name="area_name" class="form-control" value="{{ weaver.area_name }}" required></div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="mandal" class="form-control-label">Mandal</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="mandal" name="mandal" class="form-control" value="{{ weaver.mandal }}"></div>
+                        
+                        <div class="col col-md-2"><label for="district" class="form-control-label">District</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="district" name="district" class="form-control" value="{{ weaver.district }}" required></div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="state" class="form-control-label">State</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="state" name="state" class="form-control" value="{{ weaver.state }}"></div>
+                        
+                        <div class="col col-md-2"><label for="payment" class="form-control-label">Payment</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="payment" name="payment" class="form-control" value="{{ weaver.payment }}" required></div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="bank_name" class="form-control-label">Bank Name</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="bank_name" name="bank_name" class="form-control" value="{{ weaver.bank_name }}"></div>
+                        
+                        <div class="col col-md-2"><label for="account_no" class="form-control-label">Account No</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="account_no" name="account_no" class="form-control" value="{{ weaver.account_no }}" required></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="ifsc_code" class="form-control-label">IFSC Code</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="ifsc_code" name="ifsc_code" class="form-control" value="{{ weaver.ifsc_code }}"></div>
+                        
+                        <div class="col col-md-2"><label for="branch_name" class="form-control-label">Branch Name</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="branch_name" name="branch_name" class="form-control" value="{{ weaver.branch_name }}" required></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label for="no_of_charkas" class="form-control-label">No of Charkas</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="no_of_charkas" name="no_of_charkas" class="form-control" value="{{ weaver.no_of_charkas }}"></div>
+                        
+                        <div class="col col-md-2"><label for="no_of_looms" class="form-control-label">No of Looms</label></div>
+                        <div class="col-12 col-md-4"><input type="text" id="no_of_looms" name="no_of_looms" class="form-control" value="{{ weaver.no_of_looms }}" required></div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="reset" class="btn btn-danger btn-sm">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
